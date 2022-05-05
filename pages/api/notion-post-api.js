@@ -33,13 +33,13 @@ const notion = new Client({ auth: process.env.NOTION_SECRET });
         ],
       },
       Weight: {
-        number: data.Weight,
+        number: Number(data.Weight),
       },
       Rep: {
-        number: data.Rep,
+        number: Number(data.Rep),
       },
       Set: {
-        number: data.Set,
+        number: Number(data.Set),
       },
       Name: {
         select: {

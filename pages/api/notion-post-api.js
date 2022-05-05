@@ -2,7 +2,7 @@ import { Client } from '@notionhq/client';
 
 
 
-export default function notionPostApi(req, res,handler) {
+export default function notionPostApi(req, res) {
   console.log(JSON.parse(req.body))
 const data = JSON.parse(req.body)
 const databaseId =  process.env.NOTION_DATABASE_ID;
@@ -17,7 +17,7 @@ const yobi = new Array("日","月","火","水","木","金","土");
 const trainingDate = year+"年"+month+"月"+day+"日 "+yobi[week]+ "曜日"
 
 const notion = new Client({ auth: process.env.NOTION_SECRET });
-return async () => {
+(async () => {
   const response = await notion.pages.create({
     parent: {
       database_id: databaseId,
@@ -33,13 +33,13 @@ return async () => {
         ],
       },
       Weight: {
-        number: Number(data.Weight),
+        number: data.Weight,
       },
       Rep: {
-        number: Number(data.Rep),
+        number: data.Rep,
       },
       Set: {
-        number: Number(data.Set),
+        number: data.Set,
       },
       Name: {
         select: {
@@ -89,7 +89,7 @@ return async () => {
     //   },
     // ],
   });
-  await handler(req,res)
-};
+ 
+})();
 
 }
